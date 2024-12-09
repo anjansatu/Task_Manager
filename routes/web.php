@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\admin\TaskController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\UserDashboardController;
 use App\Http\Controllers\user\auth\AuthController;
 
@@ -36,4 +38,12 @@ Route::post('/update-password', [AuthController::class, 'changePasswordUser'])->
 
 Route::group(['prefix' => 'user', 'middleware' => [ 'auth']], function () {
     Route::get('/dashboard', [UserDashboardController::class, 'index'])->name('dashboard');
+
+    Route::get('tasks', [TaskController::class, 'index'])->name('admin.tasks.index');
+    Route::get('tasks/pending', [TaskController::class, 'pendingTasks'])->name('tasks.pending');
+    Route::get('tasks/in-progress', [TaskController::class, 'inProgressTasks'])->name('tasks.inProgress');
+    Route::get('tasks/completed', [TaskController::class, 'completedTasks'])->name('tasks.completed');
+    Route::get('tasks/showtask/{taskId}', [NotificationController::class, 'showtask'])->name('tasks.showtask');
+    Route::patch('/tasks/{task}/update-status', [TaskController::class,'updateStatus'])->name('tasks.update-status');
+
 });

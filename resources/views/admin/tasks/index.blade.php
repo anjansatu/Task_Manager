@@ -1,6 +1,6 @@
-@extends('layouts.app')
+@extends('admin.layouts.master')
 
-@section('content')
+@section('admin-content')
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -10,8 +10,8 @@
                     <div class="card-body">
 
                         <h2>All Tasks</h2>
-                        @if(auth()->user()->type != 'user' && auth()->user()->type != 'manager')
-                            <a href="{{ route('admin.tasks.create') }}" class="btn btn-primary">Add Task</a>
+                        {{-- @if(auth()->user()->type != 'user' && auth()->user()->type != 'manager')
+                            <a href="{{ route('admin.tasks.create') }}" class="btn btn-primary">Add Task</a> --}}
 
 
                             <!-- Task list -->
@@ -49,9 +49,9 @@
                                             </form>
                                         </td>
                                         <td>
-                                            <a href="{{ route('notify.user', ['taskId' => $task->id]) }}" class="btn btn-primary">
+                                            {{-- <a href="{{ route('notify.user', ['taskId' => $task->id]) }}" class="btn btn-primary">
                                                 Notify User
-                                            </a>
+                                            </a> --}}
                                     </tr>
 
                                     <!-- Task Modal -->
@@ -84,7 +84,7 @@
                                 @endforeach
                                 </tbody>
                             </table>
-                        @else
+                        {{-- @else
                             <table class="table">
                                 <thead>
                                 <tr>
@@ -148,7 +148,7 @@
                                 </tbody>
                             </table>
 
-                        @endif
+                        @endif --}}
                     </div>
                 </div>
             </div>

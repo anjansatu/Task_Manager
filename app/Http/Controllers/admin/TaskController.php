@@ -1,40 +1,33 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
 
 use App\Models\Task;
 use App\Models\User;
-use App\Notifications\TaskAssigned;
 use Illuminate\Http\Request;
+use App\Notifications\TaskAssigned;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
-
     public function index()
     {
-        // Display all tasks
-        $utype = auth()->user()->type;
-        if ($utype == 'admin' || $utype == 'manager') {
+
             $tasks = Task::all();
-        } else {
-            $tasks = auth()->user()->tasks()->completed()->get();
-        }
-
-
-        return view('tasks.index', compact('tasks'));
+       
+        return view('admin.tasks.index', compact('tasks'));
     }
+
 
     public function create()
     {
-        // Display form to create a new task
-        $users = User::all();
-        return view('tasks.create', compact('users'));
+        $data['users'] = User::all();
+        return view('admin.tasks.create', $data);
     }
 
-    public function store(Request $request)
+    public function postCreate(Request $request)
     {
-        // Store a new task
         $task = new Task;
         $task->title = $request->input('title');
         $task->description = $request->input('description');
@@ -42,11 +35,11 @@ class TaskController extends Controller
         $task->user_id = $request->input('user_id');
         $task->created_at = now();
 
-        $user = User::find($request->input('user_id')); // Retrieve the User model instance
+        $user = User::find($request->input('user_id'));
 
         if ($user) {
-            $task->save(); // Save the task first to get the ID
-            $user->notify(new TaskAssigned($task)); // Now generate the URL with the task ID
+            $task->save();
+            $user->notify(new TaskAssigned($task));
         } else {
             return redirect()->route('admin.tasks.index')->with('error', 'User not found.');
         }
@@ -54,18 +47,15 @@ class TaskController extends Controller
         return redirect()->route('admin.tasks.index')->with('success', 'Task created successfully');
     }
 
-
     public function edit($id)
     {
-        // Display form to edit a task
-        $task = Task::findOrFail($id);
-        $users = User::all();
-        return view('tasks.edit', compact('task', 'users'));
+        $data['task'] = Task::findOrFail($id);
+        $data['users'] = User::all();
+        return view('admin.tasks.edit', $data);
     }
 
     public function update(Request $request, $id)
     {
-        // Update an existing task
         $task = Task::findOrFail($id);
         $task->title = $request->input('title');
         $task->description = $request->input('description');
@@ -78,22 +68,22 @@ class TaskController extends Controller
 
     public function destroy($id)
     {
-        // Delete a task
         $task = Task::findOrFail($id);
         $task->delete();
 
         return redirect()->route('admin.tasks.index')->with('success', 'Task deleted successfully');
     }
 
+
     public function pendingTasks()
     {
         $utype = auth()->user()->type;
         if ($utype == 'admin' || $utype == 'manager') {
-            $tasks = Task::pending()->get();
+            $data['tasks'] = Task::pending()->get();
         } else {
-            $tasks = auth()->user()->tasks()->pending()->get();
+            $data['tasks'] = auth()->user()->tasks()->pending()->get();
         }
-        return view('tasks.pending', compact('tasks'));
+        return view('admin.tasks.pending', $data);
     }
 
     public function inProgressTasks()
@@ -105,7 +95,7 @@ class TaskController extends Controller
             $tasks = auth()->user()->tasks()->inProgress()->get();
         }
 
-        return view('tasks.in-progress', compact('tasks'));
+        return view('admin.tasks.in-progress', compact('tasks'));
     }
 
     public function completedTasks()
@@ -117,15 +107,14 @@ class TaskController extends Controller
             $tasks = auth()->user()->tasks()->completed()->get();
         }
 
-        return view('tasks.completed', compact('tasks'));
+        return view('admin.tasks.completed', compact('tasks'));
     }
 
-    //updating tasks from user
     public function updateStatus(Task $task, Request $request)
     {
         $request->validate([
             'status' => 'required|in:To Do,In Progress,Completed',
-            'feedback' => 'nullable|string|max:255', // New validation rule for feedback
+            'feedback' => 'nullable|string|max:255',
         ]);
 
         $task->status = $request->input('status');

@@ -1,6 +1,6 @@
-@extends('layouts.app')
+@extends('admin.layouts.master')
 
-@section('content')
+@section('admin-content')
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -10,7 +10,7 @@
                     <div class="card-body">
                         <h2>Create Task</h2>
 
-                        <form method="post" action="{{ route('admin.tasks.store') }}">
+                        <form method="post" action="{{ route('admin.task.postCreate') }}">
                             @csrf
                             <div class="form-group">
                                 <label for="title">Title:</label>
