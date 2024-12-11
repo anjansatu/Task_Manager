@@ -49,9 +49,9 @@
                                             </form>
                                         </td>
                                         <td>
-                                            {{-- <a href="{{ route('notify.user', ['taskId' => $task->id]) }}" class="btn btn-primary">
+                                            <a href="{{ route('admin.notify.user', ['taskId' => $task->id]) }}" class="btn btn-primary">
                                                 Notify User
-                                            </a> --}}
+                                            </a>
                                     </tr>
 
                                     <!-- Task Modal -->

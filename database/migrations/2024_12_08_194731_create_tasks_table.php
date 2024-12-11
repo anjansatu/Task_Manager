@@ -17,7 +17,7 @@ return new class extends Migration
                 ->onDelete('cascade');
             $table->string('title');
             $table->text('description');
-            $table->enum('status', ['To Do', 'In Progress', 'Completed'])->default('To Do');
+            $table->string('status',)->default(TASK_STATUS_TO_DO);
             $table->timestamps();
         });
     }

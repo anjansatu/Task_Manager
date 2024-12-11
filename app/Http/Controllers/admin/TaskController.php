@@ -13,10 +13,19 @@ class TaskController extends Controller
 {
     public function index()
     {
+        // Initialize the tasks variable
+        $tasks = [];
 
+        if (auth('admin')->user()->id) {
             $tasks = Task::all();
-       
-        return view('admin.tasks.index', compact('tasks'));
+        } else {
+            if (auth()->user()) {
+                $tasks = auth()->user()->tasks()->where('status', 'completed')->get();
+            }
+        }
+
+       $data['tasks'] = $tasks;
+        return view('admin.tasks.index', $data);
     }
 
 
@@ -41,10 +50,10 @@ class TaskController extends Controller
             $task->save();
             $user->notify(new TaskAssigned($task));
         } else {
-            return redirect()->route('admin.tasks.index')->with('error', 'User not found.');
+            return redirect()->route('admin.task.index')->with('error', 'User not found.');
         }
 
-        return redirect()->route('admin.tasks.index')->with('success', 'Task created successfully');
+        return redirect()->route('admin.task.index')->with('success', 'Task created successfully');
     }
 
     public function edit($id)
@@ -77,12 +86,14 @@ class TaskController extends Controller
 
     public function pendingTasks()
     {
-        $utype = auth()->user()->type;
-        if ($utype == 'admin' || $utype == 'manager') {
-            $data['tasks'] = Task::pending()->get();
-        } else {
-            $data['tasks'] = auth()->user()->tasks()->pending()->get();
-        }
+
+        // if (auth('admin')->user()->id) {
+            // $data['tasks'] = Task::pending()->get();
+        // } else {
+            // $data['tasks'] = auth()->user()->tasks()->pending()->get();
+        // }
+        $data['tasks'] = Task::where('user_id',auth()->user()->id)->where('status','To Do')->get();
+        // dd( $data['tasks']);
         return view('admin.tasks.pending', $data);
     }
 
@@ -95,7 +106,7 @@ class TaskController extends Controller
             $tasks = auth()->user()->tasks()->inProgress()->get();
         }
 
-        return view('admin.tasks.in-progress', compact('tasks'));
+        return view('admin.tasks.in-Progress', compact('tasks'));
     }
 
     public function completedTasks()

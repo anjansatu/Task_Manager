@@ -1045,3 +1045,51 @@ body.uikit .btn-download {
     font-size: 70px;
   }
 }
+
+.task-list {
+    margin-top: 20px;
+    list-style: none;
+    padding: 0;
+}
+.task-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.task-item:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+.task-badge {
+    font-size: 1rem;
+    padding: 0.5em 1em;
+    border-radius: 12px;
+}
+.task-timestamp {
+    font-size: 0.85rem;
+    color: #5a5c00;
+}
+.task-title {
+    font-weight: bold;
+    margin: 0;
+}
+.task-description {
+    margin: 5px 0;
+}
+.badge-todo {
+    background-color: #2aa01a;
+    color: white;
+}
+.badge-inprogress {
+    background-color: #9ef80c;
+    color: white;
+}
+.badge-complete {
+    background-color: #08004d;
+    color: white;
+}

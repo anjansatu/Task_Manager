@@ -1,9 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\admin\TaskController;
 use App\Http\Controllers\admin\auth\AuthController;
 use App\Http\Controllers\admin\DashboardController;
+use App\Http\Controllers\admin\NotificationController;
 
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('login', [AuthController::class, 'getLogin'])->name('getLogin');
@@ -28,6 +30,8 @@ Route::group(['middleware' => ['auth:admin']], function () {
     Route::delete('users/{user}', [UserController::class, 'destroy'])->name('admin.users.destroy');
     //Change User Type
     Route::patch('/admin/users/{user}/update-type', [UserController::class, 'updateType'])->name('admin.users.update-type');
+
+    Route::get('/notify-user/{taskId}', [NotificationController::class, 'notifyUser'])->name('admin.notify.user');
 });
 
 
