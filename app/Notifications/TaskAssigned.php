@@ -42,7 +42,7 @@ class TaskAssigned extends Notification
             ->line('Task Details:')
             ->line('Title: ' . $this->task->title)
             ->line('Description: ' . $this->task->description)
-            ->action('View Task', route('tasks.showtask', ['taskId' => $this->task->id]))
+            ->action('View Task', route('user.tasks.showtask', ['taskId' => $this->task->id]))
             ->line('Thank you for using our application!');
     }
     /**

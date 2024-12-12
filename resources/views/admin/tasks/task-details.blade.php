@@ -1,6 +1,6 @@
-@extends('user.layouts.master')
+@extends('admin.layouts.master')
 
-@section('user-content')
+@section('admin-content')
 
 <div class="container">
     <div class="row justify-content-center">
@@ -18,7 +18,6 @@
                             </div>
                         @endif
                         <div class="container">
-                            <h2 class="mb-4">Your Tasks</h2>
                             <div class="container">
                                 <div class="card mt-4">
                                     <div class="card-header">

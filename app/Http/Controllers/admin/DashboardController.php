@@ -16,11 +16,14 @@ class DashboardController extends Controller
 
         $data['recentTasks'] = Task::latest()->first();
         $data['recentUsers'] = User::latest()->first();
-        $data['pendingTasksCount'] = Task::where('status', 'To Do')->count();
-        $data['pendingTasksCount'] = Task::where('status', 'Completed')->count();
-        $data['pendingUsersCount'] = User::where('email_verified_at', 'null')->count();
+
+        $data['pendingTasksCount'] = Task::where('status', TASK_STATUS_TO_DO)->count();
+        $data['completedTasksCount'] = Task::where('status', TASK_STATUS_COMPLETE)->count();
+
+        $data['pendingUsersCount'] = User::whereNull('email_verified_at')->count();
 
 
-        return view('admin.dashboard.index',$data);
+        return view('admin.dashboard.index', $data);
     }
+
 }

@@ -6,145 +6,141 @@ use App\Models\Task;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Notifications\TaskAssigned;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\BaseController as Controller;
 
 class TaskController extends Controller
 {
     public function index()
     {
-        // Initialize the tasks variable
-        $tasks = [];
-
-        if (auth('admin')->user()->id) {
-            $tasks = Task::all();
-        } else {
-            if (auth()->user()) {
-                $tasks = auth()->user()->tasks()->where('status', 'completed')->get();
+        try {
+            if (auth('admin')->user()->id) {
+                $tasks = Task::all();
             }
+            $data['tasks'] = $tasks ?? [];
+            return view('admin.tasks.index', $data);
+        } catch (\Exception $e) {
+            return $this->sessionError("Oops! An error occurred while fetching the profile.","admin.task.index");
         }
-
-       $data['tasks'] = $tasks;
-        return view('admin.tasks.index', $data);
     }
-
 
     public function create()
     {
-        $data['users'] = User::all();
-        return view('admin.tasks.create', $data);
+        try {
+            $data['users'] = User::all();
+            return view('admin.tasks.create', $data);
+        } catch (\Exception $e) {
+            return $this->sessionError("Oops! An error occurred while fetching the profile.","admin.task.index");
+        }
     }
 
     public function postCreate(Request $request)
     {
-        $task = new Task;
-        $task->title = $request->input('title');
-        $task->description = $request->input('description');
-        $task->status = $request->input('status');
-        $task->user_id = $request->input('user_id');
-        $task->created_at = now();
+        try {
+            $task = new Task;
+            $task->title = $request->input('title');
+            $task->description = $request->input('description');
+            $task->status = $request->input('status');
+            $task->user_id = $request->input('user_id');
+            $task->created_at = now();
 
-        $user = User::find($request->input('user_id'));
+            $user = User::find($request->input('user_id'));
 
-        if ($user) {
-            $task->save();
-            $user->notify(new TaskAssigned($task));
-        } else {
-            return redirect()->route('admin.task.index')->with('error', 'User not found.');
+            if ($user) {
+                $task->save();
+                $user->notify(new TaskAssigned($task));
+                return $this->sessionSuccess("Task created successfully","admin.task.index");
+            } else {
+             return $this->sessionError("Oops! An error occurred .","admin.task.index");
+            }
+        } catch (\Exception $e) {
+            return $this->sessionError("Oops! An error occurred .","admin.task.index");
         }
-
-        return redirect()->route('admin.task.index')->with('success', 'Task created successfully');
     }
 
     public function edit($id)
     {
-        $data['task'] = Task::findOrFail($id);
-        $data['users'] = User::all();
-        return view('admin.tasks.edit', $data);
+        try {
+            $data['task'] = Task::findOrFail($id);
+            $data['users'] = User::all();
+            return view('admin.tasks.edit', $data);
+        } catch (\Exception $e) {
+            return $this->sessionError("Oops! An error occurred.","admin.task.index");
+        }
     }
 
     public function update(Request $request, $id)
     {
-        $task = Task::findOrFail($id);
-        $task->title = $request->input('title');
-        $task->description = $request->input('description');
-        $task->status = $request->input('status');
-        $task->user_id = $request->input('user_id');
-        $task->save();
+        try {
+            $task = Task::findOrFail($id);
+            $task->title = $request->input('title');
+            $task->description = $request->input('description');
+            $task->status = $request->input('status');
+            $task->user_id = $request->input('user_id');
+            $task->save();
 
-        return redirect()->route('admin.tasks.index')->with('success', 'Task updated successfully');
+            return $this->sessionError("Task updated successfully","admin.task.index");
+        } catch (\Exception $e) {
+            return $this->sessionError("Oops! An error occurred .","admin.task.index");
+        }
     }
 
     public function destroy($id)
     {
-        $task = Task::findOrFail($id);
-        $task->delete();
+        try {
+            $task = Task::findOrFail($id);
+            $task->delete();
 
-        return redirect()->route('admin.tasks.index')->with('success', 'Task deleted successfully');
+            return $this->sessionSuccess("Task deleted successfully.","admin.task.index");
+        } catch (\Exception $e) {
+            return $this->sessionError("Oops! An error occurred .","admin.task.index");
+        }
     }
-
 
     public function pendingTasks()
     {
-
-        // if (auth('admin')->user()->id) {
-            // $data['tasks'] = Task::pending()->get();
-        // } else {
-            // $data['tasks'] = auth()->user()->tasks()->pending()->get();
-        // }
-        $data['tasks'] = Task::where('user_id',auth()->user()->id)->where('status','To Do')->get();
-        // dd( $data['tasks']);
-        return view('admin.tasks.pending', $data);
+        try {
+            if (auth('admin')->user()->id) {
+                $data['tasks'] = Task::where('status', TASK_STATUS_TO_DO)->get();
+            }
+            return view('admin.tasks.index', $data);
+        } catch (\Exception $e) {
+            return $this->sessionError("Oops! An error occurred .","admin.task.index");
+        }
     }
 
     public function inProgressTasks()
     {
-        $utype = auth()->user()->type;
-        if ($utype == 'admin' || $utype == 'manager') {
-            $tasks = Task::inProgress()->get();
-        } else {
-            $tasks = auth()->user()->tasks()->inProgress()->get();
+        try {
+            if (auth('admin')->user()->id) {
+                $data['tasks'] = Task::where('status', TASK_STATUS_IN_PROGRESS)->get();
+            }
+            return view('admin.tasks.index', $data);
+        } catch (\Exception $e) {
+            return $this->sessionError("Oops! An error occurred.","admin.task.index");
         }
-
-        return view('admin.tasks.in-Progress', compact('tasks'));
     }
 
     public function completedTasks()
     {
-        $utype = auth()->user()->type;
-        if ($utype == 'admin' || $utype == 'manager') {
-            $tasks = Task::completed()->get();
-        } else {
-            $tasks = auth()->user()->tasks()->completed()->get();
-        }
-
-        return view('admin.tasks.completed', compact('tasks'));
-    }
-
-    public function updateStatus(Task $task, Request $request)
-    {
-        $request->validate([
-            'status' => 'required|in:To Do,In Progress,Completed',
-            'feedback' => 'nullable|string|max:255',
-        ]);
-
-        $task->status = $request->input('status');
-        $task->feedback = $request->input('feedback');
-        $task->save();
-
-        $redirectTo = $this->getRedirectRoute(Auth::user()->type);
-
-        return redirect()->route($redirectTo)->with('status', 'Task status updated successfully.');
-    }
-    private function getRedirectRoute($userType)
-    {
-        switch ($userType) {
-            case 'admin':
-                return 'admin.home';
-            case 'manager':
-                return 'manager.home';
-            default:
-                return 'home';
+        try {
+            if (auth('admin')->user()->id) {
+                $data['tasks'] = Task::where('status', TASK_STATUS_COMPLETE)->get();
+            }
+            return view('admin.tasks.index', $data);
+        } catch (\Exception $e) {
+            return $this->sessionError("Oops! An error occurred.","admin.task.index");
         }
     }
+
+    public function showtask($taskId)
+    {
+        try {
+            $data['task'] = Task::findOrFail($taskId);
+            return view('admin.tasks.task-details', $data);
+        } catch (\Exception $e) {
+            return $this->sessionError("Oops! An error occurred .","admin.task.index");
+        }
+    }
+
 }

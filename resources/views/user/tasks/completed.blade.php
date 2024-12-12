@@ -10,7 +10,7 @@
                     <p class="task-description">{{ $task->description }}</p>
                     <small class="task-timestamp">Created: {{ $task->created_at->format('d  Y') }}</small>
                 </div>
-                <span class="badge task-badge {{ $task->status == 'Complete' ? 'badge-complete' : 'badge-secondary' }}">
+                <span class="badge task-badge {{ $task->status == 'Complete' ? 'badge-completed' : 'badge-secondary' }}">
                     {{ $task->status }}
                 </span>
 

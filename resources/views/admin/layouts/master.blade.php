@@ -61,7 +61,7 @@
         <!-- loader END -->
         <aside class="sidebar sidebar-base sidebar-white sidebar-default navs-rounded-all " id="first-tour" data-toggle="main-sidebar" data-sidebar="responsive">
             <div class="sidebar-header d-flex align-items-center justify-content-start">
-                <a href="../dashboard/index.html" class="navbar-brand">
+                <a href="{{ route('admin.getDashboard') }}" class="navbar-brand">
 
                     <!--Logo start-->
                     <div class="logo-main">
@@ -78,7 +78,7 @@
                             </svg>
                         </div>
                     </div>
-                    <!--logo End-->            <h4 class="logo-title" data-setting="app_name">Qompac UI</h4>
+                    <!--logo End-->            <h4 class="logo-title" data-setting="app_name">Task Manager admin</h4>
                 </a>
                 <div class="sidebar-toggle" data-toggle="sidebar" data-active="true">
                     <i class="icon">
@@ -104,7 +104,7 @@
             <!--Nav Start-->
                 <nav class="nav navbar navbar-expand-xl navbar-light iq-navbar">
                    <div class="container-fluid navbar-inner">
-                      <a href="../dashboard/index.html" class="navbar-brand">
+                      <a href="{{ route('admin.getDashboard') }}" class="navbar-brand">
 
                          <!--Logo start-->
                          <div class="logo-main">
@@ -121,7 +121,7 @@
                                  </svg>
                              </div>
                          </div>
-                         <!--logo End-->         <h4 class="logo-title d-block d-xl-none" data-setting="app_name">Qompac UI</h4>
+                         <!--logo End-->         <h4 class="logo-title d-block d-xl-none" data-setting="app_name">Task Manager Admin</h4>
                       </a>
                       <div class="sidebar-toggle" data-toggle="sidebar" data-active="true">
                          <i class="icon d-flex">
@@ -162,17 +162,16 @@
                             </li>
                             <li class="nav-item dropdown">
                                <a class="py-0 nav-link d-flex align-items-center ps-3" href="#" id="profile-setting" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                  <img src="../assets/images/avatars/01.png" alt="User-Profile" class="img-fluid avatar avatar-50 avatar-rounded" loading="lazy">
+                                  <img src="{{ asset('assets/images/avatars/01.png') }}" alt="User-Profile" class="img-fluid avatar avatar-50 avatar-rounded" loading="lazy">
                                   <div class="caption ms-3 d-none d-md-block ">
-                                     <h6 class="mb-0 caption-title">Austin Robertson</h6>
-                                     <p class="mb-0 caption-sub-title">Marketing Administrator</p>
+                                     <h6 class="mb-0 caption-title">Admin</h6>
                                   </div>
                                </a>
                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profile-setting">
-                                  <li><a class="dropdown-item" href="../dashboard/app/user-profile.html">Profile</a></li>
-                                  <li><a class="dropdown-item" href="../dashboard/app/user-privacy-setting.html">Privacy Setting</a></li>
+                                  <li><a class="dropdown-item" href="{{ route('admin.profile') }}">Profile</a></li>
+                                  {{-- <li><a class="dropdown-item" href="../dashboard/app/user-privacy-setting.html">Privacy Setting</a></li> --}}
                                   <li><hr class="dropdown-divider"></li>
-                                  <li><a class="dropdown-item" href="../dashboard/auth/sign-in.html">Logout</a></li>
+                                  <li><a class="dropdown-item" href="{{ route('admin.logout') }}">Logout</a></li>
                                </ul>
                             </li>
                          </ul>

@@ -5,27 +5,40 @@ namespace App\Http\Controllers\admin;
 use App\Models\Task;
 use App\Models\User;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Notifications\TaskStatusNotification;
+use App\Http\Controllers\BaseController as Controller;
+
 
 class NotificationController extends Controller
 {
     public function notifyUser($taskId)
     {
-        $task = Task::findOrFail($taskId);
-        $user = User::findOrFail($task->user_id);
+        try {
+            $task = Task::findOrFail($taskId);
+            $user = User::findOrFail($task->user_id);
 
-        // Notify the user
-        $user->notify(new TaskStatusNotification($task));
-
-        return redirect()->route('admin.task.index')->with('success', 'Notification sent successfully');
+            $user->notify(new TaskStatusNotification($task));
+            return $this->sessionSuccess('Notification sent successfully', 'admin.tasks.index');
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            return $this->sessionError("Task or User not found","admin.task.index");
+        } catch (\Exception $e) {
+            return $this->sessionError("Oops! An error occurred.","admin.task.index");
+        }
     }
 
-    // show notified task
 
     public function showtask($taskId)
     {
-        $data['task'] = Task::findOrFail($taskId);
-        return view('admin.tasks.showtask', $data);
+        try {
+            $data['task'] = Task::findOrFail($taskId);
+            return view('admin.tasks.showtask', $data);
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            return $this->sessionError("Oops! An error occurred.","tasks.index");
+
+        } catch (\Exception $e) {
+            return $this->sessionError("Oops! An error occurred.","tasks.index");
+
+        }
     }
+
 }

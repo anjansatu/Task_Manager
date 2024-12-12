@@ -17,18 +17,7 @@
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link " aria-current="page" href="{{ route('admin.task.index') }}">
-            <i class="icon" data-bs-toggle="tooltip" title="Analytics" data-bs-placement="right">
-                <svg width="20" height="20" class="icon-20" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M10.1615 3.15833C10.1615 4.639 11.3636 5.83931 12.8464 5.83931C13.0097 5.83851 13.1726 5.82283 13.333 5.79248V11.1076C13.333 13.3437 12.014 14.6666 9.77463 14.6666H4.89725C2.65201 14.6666 1.33301 13.3437 1.33301 11.1076V6.23736C1.33301 4.00126 2.65201 2.66663 4.89725 2.66663H10.2084C10.1769 2.82863 10.1612 2.9933 10.1615 3.15833ZM8.76632 9.93102L10.6716 7.47248V7.46077C10.8347 7.2416 10.793 6.93255 10.5778 6.76419C10.4736 6.68375 10.3411 6.64893 10.2108 6.66768C10.0804 6.68644 9.96324 6.75716 9.88601 6.8637L8.27976 8.93004L6.45074 7.49004C6.34632 7.40869 6.21348 7.37277 6.08221 7.39039C5.95095 7.40802 5.83233 7.47769 5.75313 7.5837L3.78342 10.1242C3.71419 10.2105 3.67691 10.318 3.6779 10.4286C3.66647 10.6521 3.80759 10.855 4.02126 10.9225C4.23493 10.9899 4.46726 10.9048 4.58655 10.7154L6.23384 8.58467L8.06286 10.0188C8.16689 10.1027 8.3006 10.1407 8.43327 10.1242C8.56594 10.1076 8.68617 10.0379 8.76632 9.93102Z" fill="currentColor"/>
-                <ellipse opacity="0.4" cx="12.9997" cy="2.99998" rx="1.66667" ry="1.66667" fill="currentColor"/>
-                </svg>
-            </i>
-            <span class="item-name">Task</span>
-        </a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link " aria-current="page" href="../dashboard/crypto-dashboard.html">
+        <a class="nav-link " aria-current="page" href="{{ route('admin.user.index') }}">
             <i class="icon" data-bs-toggle="tooltip" title="Crypto" data-bs-placement="right">
                 <svg class="icon-20" width="20" height="20" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path opacity="0.4" d="M10.1167 0.333496H3.88856C1.61893 0.333496 0.333008 1.61942 0.333008 3.88905V10.1113C0.333008 12.3809 1.61893 13.6668 3.88856 13.6668H10.1167C12.3863 13.6668 13.6663 12.3809 13.6663 10.1113V3.88905C13.6663 1.61942 12.3863 0.333496 10.1167 0.333496Z" fill="currentColor"/>
@@ -37,7 +26,7 @@
                     <path d="M10.0932 7.66406C9.78502 7.66406 9.53613 7.91295 9.53613 8.2211V10.3841C9.53613 10.6863 9.78502 10.9352 10.0872 10.9352C10.3954 10.9352 10.6443 10.6863 10.6443 10.3841V8.2211C10.6443 7.91295 10.3954 7.66406 10.0932 7.66406Z" fill="currentColor"/>
                 </svg>
             </i>
-            <span class="item-name">Crypto</span>
+            <span class="item-name">Users</span>
         </a>
     </li>
     <li class="nav-item">
@@ -83,25 +72,45 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " href="../dashboard/index-boxed.html">
-                    <i class="icon">
+                <a class="nav-link " href="{{ route('admin.tasks.pending') }}">
+                    <i class="icon svg-icon">
                         <svg class="icon-10" width="10" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <g>
                             <circle cx="12" cy="12" r="8" fill="currentColor"></circle>
                             </g>
                         </svg>
                     </i>
-                    <i class="sidenav-mini-icon" data-bs-toggle="tooltip" title="Boxed Horizontal" data-bs-placement="right"> B </i>
-                    <span class="item-name">Boxed Horizontal</span>
+                    <i class="sidenav-mini-icon" data-bs-toggle="tooltip" title="Dual Compact" data-bs-placement="right"> D </i>
+                    <span class="item-name">Pending Task</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="{{ route('admin.tasks.inProgress') }}">
+                    <i class="icon svg-icon">
+                        <svg class="icon-10" width="10" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <g>
+                            <circle cx="12" cy="12" r="8" fill="currentColor"></circle>
+                            </g>
+                        </svg>
+                    </i>
+                    <i class="sidenav-mini-icon" data-bs-toggle="tooltip" title="Dual Compact" data-bs-placement="right"> D </i>
+                    <span class="item-name">In-Pregress Task</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="{{ route('admin.tasks.completed') }}">
+                    <i class="icon svg-icon">
+                        <svg class="icon-10" width="10" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <g>
+                            <circle cx="12" cy="12" r="8" fill="currentColor"></circle>
+                            </g>
+                        </svg>
+                    </i>
+                    <i class="sidenav-mini-icon" data-bs-toggle="tooltip" title="Dual Compact" data-bs-placement="right"> D </i>
+                    <span class="item-name">Completed Task</span>
                 </a>
             </li>
         </ul>
     </li>
-    <li><hr class="hr-horizontal"></li>
-    <li class="nav-item static-item">
-        <a class="nav-link static-item disabled" href="#" tabindex="-1">
-            <span class="default-icon">Pages</span>
-            <span class="mini-icon">-</span>
-        </a>
-    </li>
+
 </ul>

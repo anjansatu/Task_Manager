@@ -163,24 +163,22 @@
                             </li>
                             <li class="nav-item dropdown">
                                <a class="py-0 nav-link d-flex align-items-center ps-3" href="#" id="profile-setting" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                  <img src="../assets/images/avatars/01.png" alt="User-Profile" class="img-fluid avatar avatar-50 avatar-rounded" loading="lazy">
+                                  <img src="{{ asset('assets/images/avatars/01.png') }}" alt="User-Profile" class="img-fluid avatar avatar-50 avatar-rounded" loading="lazy">
                                   <div class="caption ms-3 d-none d-md-block ">
-                                     <h6 class="mb-0 caption-title">Austin Robertson</h6>
-                                     <p class="mb-0 caption-sub-title">Marketing Administrator</p>
+                                     <h6 class="mb-0 caption-title">User</h6>
                                   </div>
                                </a>
                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profile-setting">
-                                  <li><a class="dropdown-item" href="../dashboard/app/user-profile.html">Profile</a></li>
-                                  <li><a class="dropdown-item" href="../dashboard/app/user-privacy-setting.html">Privacy Setting</a></li>
+                                  <li><a class="dropdown-item" href="{{ route('user.profile') }}">Profile</a></li>
                                   <li><hr class="dropdown-divider"></li>
-                                  <li><a class="dropdown-item" href="../dashboard/auth/sign-in.html">Logout</a></li>
+                                  <li><a class="dropdown-item" href="{{ route('signout') }}">Logout</a></li>
                                </ul>
                             </li>
                          </ul>
                       </div>
                    </div>
                 </nav>
-            <!--Nav End-->
+            <!--Nav End-->t
             </div>
             <div class="content-inner container-fluid pb-0" id="page_layout">
                @yield('user-content')

@@ -4,42 +4,37 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\BaseController as Controller;
 
 class UserController extends Controller
 {
-    public function index()
-    {
-        // Display all users
-        $users = User::all();
-        return view('users.index', compact('users'));
-    }
+
 
     public function showTasks($id)
     {
-        // Display tasks for a specific user
-        $user = User::findOrFail($id);
-        $tasks = $user->tasks;
-        return view('users.show-tasks', compact('user', 'tasks'));
+        try {
+            $data['user'] = User::findOrFail($id);
+            $data['tasks'] =  $data['user']->tasks;
+            return view('users.show-tasks', compact('user', 'tasks'));
+        } catch (\Exception $e) {
+        return $this->sessionError("Oops!User not found or an error occurred.");
+
+        }
     }
+
 
     public function destroy($id)
     {
-        // Delete a user
-        $user = User::findOrFail($id);
-        $user->delete();
+        try {
+            $user = User::findOrFail($id);
+            $user->delete();
+            return $this->sessionSuccess("User deleted successfully " , 'admin.user.index');
 
-        return redirect()->route('admin.users.index')->with('success', 'User deleted successfully');
+        } catch (\Exception $e) {
+        return $this->sessionError("Oops!Failed to delete user or an error occurred.");
+
+        }
     }
 
-    public function updateType(Request $request, User $user)
-    {
-        $request->validate([
-            'type' => 'required|in:0,1,2', //  0 is user, 1 is admin, and 2 is manager
-        ]);
 
-        $user->type = $request->input('type');
-        $user->save();
-
-        return redirect()->route('admin.users.index')->with('success', 'User type updated successfully.');
-    }
 }

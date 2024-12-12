@@ -15,7 +15,7 @@ class MailService
         try {
             Mail::send('emails.registration', $data, function ($message) use ($to) {
                 $message->from(config('mail.from.address'), config('mail.from.name'));
-                $message->to($to)->subject('Confirm Your Email to Start Your Journey with Innovative');
+                $message->to($to)->subject('Confirm Your Email to Start Your Journey with Task Manager');
             });
         } catch (\Exception $e) {
             Log::info($e->getMessage());
@@ -55,6 +55,26 @@ class MailService
 
         return true;
     }
-   
+
+
+    public function mailPdf(string $to,array $data)
+    {
+        try{
+            $pdfUrl = asset('desktop/assets/pdf/task_manager.pdf');
+            $fileName = 'task_manager.pdf';
+            $pdfData = Http::get($pdfUrl)->body();
+            Mail::send('emails.account-activation-pdf', $data, function ($message) use ($to, $pdfData, $fileName) {
+                $message->from(config('mail.from.address'), config('mail.from.name'));
+                $message->to($to)->subject(' Access our Plan PDF Inside')
+                    ->attachData($pdfData, $fileName, [
+                        'mime' => 'application/pdf',
+                    ]);
+            });
+        }catch (\Exception $e){
+            Log::info($e->getMessage());
+        }
+
+        return true;
+    }
 
 }
