@@ -56,7 +56,7 @@
                             <div class="main-content-body tab-pane p-4 border-top-0 active" id="about">
                                 <div class="card-body border">
                                     <div class="mb-4 main-content-label">Privacy & Security</div>
-                                    <form class="form-horizontal" action="{{route('changePassword')}}" method="POST">
+                                    <form class="form-horizontal" action="{{route('admin.changePassword')}}" method="POST">
                                         @csrf
                                         <div class="form-group">
                                             <div class="row row-sm">

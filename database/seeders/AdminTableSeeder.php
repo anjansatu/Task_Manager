@@ -2,10 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Admin;
-use App\Models\User;
-use App\Models\Wallet;
+use DB;
 use Carbon\Carbon;
+use App\Models\User;
+use App\Models\Admin;
+use App\Models\Wallet;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -18,7 +19,7 @@ class AdminTableSeeder extends Seeder
      */
     public function run()
     {
-        \DB::table('admins')->delete();
+        DB::table('admins')->delete();
         \DB::table('admins')->insert(array(
             0 =>
                 array(

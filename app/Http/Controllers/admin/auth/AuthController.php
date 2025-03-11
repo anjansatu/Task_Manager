@@ -20,7 +20,7 @@ class AuthController extends Controller
         $admin = Admin::where('email', '=', $request->get("email"))->where('status', '!=', 5)->first();
         if ($admin) {
             if (Auth::guard('admin')->attempt(['email' => $request->get("email"), 'password' => $request->get('password')])) {
-            return $this->sessionSuccess(Null,'admin.getDashboard');
+            return $this->sessionSuccess(Null,'admin.dashboard');
 
             } else {
                 return $this->sessionError('Login Field!');

@@ -3,20 +3,9 @@
 namespace App\Http\Services\Auth;
 
 use App\Http\Repositories\Auth\AuthRepository;
-use App\Http\Services\BSCNodeServices;
 use App\Http\Services\MailService;
-use App\Models\BinaryTrees;
-use App\Models\KeySetting;
-use App\Models\Referral;
-use App\Models\SoloAgentMembers;
-use App\Models\Transaction;
-use App\Models\Unilevel;
-use App\Models\UnilevelChild;
-use App\Models\UnilevelSetting;
 use App\Models\User;
-use App\Models\UserPackage;
-use App\Models\Wallet;
-use App\Models\WalletHistory;
+
 use Carbon\Carbon;
 use App\Models\UserVerificationCode;
 use Illuminate\Http\Request;
@@ -79,7 +68,7 @@ class AuthService
             'username' => $requestArray['username'],
             'phone_number' => $requestArray['phone_number'],
             'password' => bcrypt($requestArray['password']),
-            'email_verified' => 0,
+            'balance' => 0,
             'status' => STATUS_INACTIVE,
         ];
 

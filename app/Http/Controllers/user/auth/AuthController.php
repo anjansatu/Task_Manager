@@ -5,6 +5,7 @@ namespace App\Http\Controllers\user\auth;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 use App\Http\Services\Auth\AuthService;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Password;
@@ -25,40 +26,40 @@ class AuthController extends Controller
         return view('user.auth.login');
     }
 
-    public function postLogin(Request $request){
-        if (allsetting('access_login') != 1) {
-            return $this->sessionError('Login access is currently disabled.', null);
-        }
-
-        $validator = Validator::make($request->all(), [
-            'password' => 'required',
-        ]);
-
-        if ($validator->fails()) {
-
-            return $this->sessionError($validator->errors()->first());
-        }
-
-        $login = $request->input('email');
-        $user = User::where('email', $login)->orWhere('username', $login)->first();
-
-        if (!$user) {
-            return redirect()->back()->with('error_message', "Oops! It seems there might be an error with the email/username or password you've entered. Please double-check your details and try again.");
-        }
-
-
-        if (Auth::attempt(['email'=>$user->email,'password'=>$request->input('password')]) || Auth::attempt(['email'=>$user->username,'password'=>$request->input('password')])) {
-            if (auth()->user()->status == STATUS_ACTIVE) {
-                return $this->sessionSuccess("You have successfully logged in to " , 'dashboard');
-            } elseif (auth()->user()->status == STATUS_INACTIVE) {
-                Auth::logout();
-                return $this->sessionError('Please verify your email!');
-
-            }
-            return $this->sessionSuccess("You have successfully logged in to " ,'dashboard');
-        }
-        return $this->sessionError("Oops! It seems there might be an error with the email or password you've entered. Please double-check your details and try again.");
+    public function postLogin(Request $request)
+{
+    if (allsetting('access_login') != 1) {
+        return $this->sessionError('Login access is currently disabled.', null);
     }
+
+    $validator = Validator::make($request->all(), [
+        'email' => 'required|email', // Email field validation যোগ করা হলো
+        'password' => 'required',
+    ]);
+
+    if ($validator->fails()) {
+        return $this->sessionError($validator->errors()->first());
+    }
+
+    // $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
+    //     'secret' => env('RECAPTCHA_SECRET'),
+    //     'response' => $request->input('g-recaptcha-response')
+    // ]);
+
+    // $result = $response->json();
+
+    // if (!$result['success']) {
+    //     return back()->withErrors(['captcha' => 'reCAPTCHA verification failed!']);
+    // }
+
+
+    if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')])) {
+        return $this->sessionSuccess("You have successfully logged in to ", 'dashboard');
+    }
+
+    return $this->sessionError("Oops! It seems there might be an error with the email or password you've entered. Please double-check your details and try again.");
+}
+
 
     public function signup(){
         return view('user.auth.register');

@@ -1,11 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\admin\TaskController;
+use App\Http\Controllers\AdminSsnConteroller;
 use App\Http\Controllers\admin\UserController;
+use App\Http\Controllers\AdminPriceController;
+use App\Http\Controllers\AdminDepositController;
 use App\Http\Controllers\admin\ProfileController;
 use App\Http\Controllers\admin\auth\AuthController;
 use App\Http\Controllers\admin\DashboardController;
+use App\Http\Controllers\Admin\ExcelImportController;
 use App\Http\Controllers\admin\NotificationController;
 
 Route::prefix('admin')->name('admin.')->group(function () {
@@ -17,29 +20,52 @@ Route::prefix('admin')->name('admin.')->group(function () {
 // Route::get('/force-login-{id}', [AuthController::class, 'forceLogin'])->name('forceLogin');
 
 Route::group(['middleware' => ['auth:admin']], function () {
-    Route::get('dashboard', [DashboardController::class, 'index'])->name('admin.getDashboard');
+    Route::prefix('admin')->name('admin.')->group(function () {
 
-    Route::get('/task', [TaskController::class, 'index'])->name('admin.task.index');
-    Route::get('/create-task', [TaskController::class, 'create'])->name('admin.task.create');
-    Route::post('/create-task', [TaskController::class, 'postCreate'])->name('admin.task.postCreate');
-    Route::get('tasks/{task}/edit', [TaskController::class, 'edit'])->name('admin.tasks.edit');
-    Route::put('tasks/{task}', [TaskController::class, 'update'])->name('admin.tasks.update');
-    Route::delete('tasks/{task}', [TaskController::class, 'destroy'])->name('admin.tasks.destroy');
-    Route::get('tasks/pending', [TaskController::class, 'pendingTasks'])->name('admin.tasks.pending');
-    Route::get('tasks/in-progress', [TaskController::class, 'inProgressTasks'])->name('admin.tasks.inProgress');
-    Route::get('tasks/completed', [TaskController::class, 'completedTasks'])->name('admin.tasks.completed');
-    Route::get('tasks/showtask/{taskId}', [TaskController::class, 'showtask'])->name('admin.tasks.showtask');
-    Route::get('/profile', [ProfileController::class, 'profile'])->name('admin.profile');
-    Route::post('/change-password', [ProfileController::class, 'changePassword'])->name('changePassword');
+        Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 
-    // Users
-    Route::get('users', [UserController::class, 'index'])->name('admin.user.index');
-    Route::get('users/{user}/show-tasks', [UserController::class, 'showTasks'])->name('admin.users.show_tasks');
-    Route::delete('users/{user}', [UserController::class, 'destroy'])->name('admin.users.destroy');
-    //Change User Type
+        // Profile
+        Route::get('/profile', [ProfileController::class, 'profile'])->name('profile');
+        Route::post('/change-password', [ProfileController::class, 'changePassword'])->name('changePassword');
 
-    Route::get('/notify-user/{taskId}', [NotificationController::class, 'notifyUser'])->name('admin.notify.user');
+        // Users
+        Route::prefix('users')->name('users.')->group(function () {
+            Route::get('/', [UserController::class, 'index'])->name('index');
+            Route::get('{user}/show-tasks', [UserController::class, 'showTasks'])->name('show_tasks');
+            Route::delete('{user}', [UserController::class, 'destroy'])->name('destroy');
+        });
+
+        // Deposits
+        Route::prefix('deposits')->name('deposits.')->group(function () {
+            Route::get('/', [AdminDepositController::class, 'index'])->name('index');
+            Route::get('{id}', [AdminDepositController::class, 'show'])->name('show');
+            Route::put('{id}/status', [AdminDepositController::class, 'updateStatus'])->name('updateStatus');
+
+            Route::get('deposit-method', [AdminDepositController::class, 'depositMethods'])->name('method');
+            Route::post('deposit-methods', [AdminDepositController::class, 'storeDepositMethods'])->name('storeDepositMethods');
+            Route::delete('deposit-methods/{id}', [AdminDepositController::class, 'destroyDepositMethods'])->name('destroyDepositMethods');
+        });
+
+        // Notifications
+        Route::get('/notify-user/{taskId}', [NotificationController::class, 'notifyUser'])->name('notify.user');
+
+        //SSN
+        Route::resource('ssns', AdminSsnConteroller::class);
+        Route::post('/import-excel', [ExcelImportController::class, 'importExcel'])->name('excel.import');
+
+        Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);
+
+        Route::get('force-login-{id}', [AuthController::class, 'forceLogin'])->name('forceLogin');
+
+        Route::get('price-index', [AdminPriceController::class, 'index'])->name('price.index');
+        Route::get('price-create', [AdminPriceController::class, 'create'])->name('price.create');
+        Route::post('price-store', [AdminPriceController::class, 'store'])->name('price.store');
+        Route::get('price-edit/{price}', [AdminPriceController::class, 'edit'])->name('price.edit');
+        Route::put('price-update/{price}', [AdminPriceController::class, 'update'])->name('price.update');
+        Route::delete('price-destroy/{price}', [AdminPriceController::class, 'destroy'])->name('price.destroy');
+
+    });
 });
 
 

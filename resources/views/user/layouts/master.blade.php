@@ -4,11 +4,11 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title data-setting="app_name" data-rightJoin=" Responsive Bootstrap 5 Admin Dashboard Template">Qompac UI Responsive Bootstrap 5 Admin Dashboard Template</title>
+        <title data-setting="app_name" data-rightJoin=" Responsive Bootstrap 5 Admin Dashboard Template">SSN pro</title>
         <meta name="description" content="Qompac UI is a revolutionary Bootstrap Admin Dashboard Template and UI Components Library. The Admin Dashboard Template and UI Component features 8 modules.">
         <meta name="keywords" content="premium, admin, dashboard, template, bootstrap 5, clean ui, qompac-ui, admin dashboard,responsive dashboard, optimized dashboard,">
         <meta name="author" content="Iqonic Design">
-        <meta name="DC.title" content="Qompac UI Responsive Bootstrap 5 Admin Dashboard Template">
+        <meta name="DC.title" content="SSN pro">
 
         <!-- Favicon -->
         <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}">
@@ -23,6 +23,7 @@
 
 
 
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
 
 
@@ -55,14 +56,14 @@
         <div id="loading">
         <div class="loader simple-loader">
             <div class="loader-body ">
-                <img src="{{ asset('') }}../assets/images/loader.webp" alt="loader" class="image-loader img-fluid ">
+                <img src="{{ asset('assets/images/loader.webp') }}" alt="loader" class="image-loader img-fluid ">
             </div>
         </div>
         </div>
         <!-- loader END -->
-        <aside class="sidebar sidebar-base sidebar-white sidebar-default navs-rounded-all " id="first-tour" data-toggle="main-sidebar" data-sidebar="responsive">
+        {{-- <aside class="sidebar sidebar-base sidebar-white sidebar-default navs-rounded-all " id="first-tour" data-toggle="main-sidebar" data-sidebar="responsive">
             <div class="sidebar-header d-flex align-items-center justify-content-start">
-                <a href="../dashboard/index.html" class="navbar-brand">
+                <a href="{{ route('dashboard') }}" class="navbar-brand">
 
                     <!--Logo start-->
                     <div class="logo-main">
@@ -79,7 +80,7 @@
                             </svg>
                         </div>
                     </div>
-                    <!--logo End-->            <h4 class="logo-title" data-setting="app_name">Qompac UI</h4>
+                    <!--logo End-->            <h4 class="logo-title" data-setting="app_name">SSN Pro</h4>
                 </a>
                 <div class="sidebar-toggle" data-toggle="sidebar" data-active="true">
                     <i class="icon">
@@ -99,85 +100,87 @@
                     <!-- Sidebar Menu End -->        </div>
             </div>
             <div class="sidebar-footer"></div>
-        </aside>
+        </aside> --}}
         <main class="main-content">
             <div class="position-relative ">
             <!--Nav Start-->
-                <nav class="nav navbar navbar-expand-xl navbar-light iq-navbar">
-                   <div class="container-fluid navbar-inner">
-                      <a href="../dashboard/index.html" class="navbar-brand">
+            <nav class="nav navbar navbar-expand-xl navbar-light iq-navbar shadow-sm">
+                <div class="container-fluid navbar-inner d-flex align-items-center justify-content-between">
+                    <!-- Logo -->
+                    <a href="{{ route('dashboard') }}" class="navbar-brand d-flex align-items-center">
+                        <div class="logo-main">
+                            <div class="logo-normal">
+                                <svg class="text-primary icon-30" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M7.25333 2H22.0444L29.7244 15.2103L22.0444 28.1333H7.25333L0 15.2103L7.25333 2ZM11.2356 9.32316H18.0622L21.3334 15.2103L18.0622 20.9539H11.2356L8.10669 15.2103L11.2356 9.32316Z" fill="currentColor"/>
+                                    <path d="M23.751 30L13.2266 15.2103H21.4755L31.9999 30H23.751Z" fill="#3FF0B9"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <h2 class="fw-bold text-primary ms-2">SSN PRO</h2>
+                    </a>
 
-                         <!--Logo start-->
-                         <div class="logo-main">
-                             <div class="logo-normal">
-                                 <svg class="text-primary icon-30" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                     <path fill-rule="evenodd" clip-rule="evenodd" d="M7.25333 2H22.0444L29.7244 15.2103L22.0444 28.1333H7.25333L0 15.2103L7.25333 2ZM11.2356 9.32316H18.0622L21.3334 15.2103L18.0622 20.9539H11.2356L8.10669 15.2103L11.2356 9.32316Z" fill="currentColor"/>
-                                     <path d="M23.751 30L13.2266 15.2103H21.4755L31.9999 30H23.751Z" fill="#3FF0B9"/>
-                                 </svg>
-                             </div>
-                             <div class="logo-mini">
-                                 <svg class="text-primary icon-30" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                     <path fill-rule="evenodd" clip-rule="evenodd" d="M7.25333 2H22.0444L29.7244 15.2103L22.0444 28.1333H7.25333L0 15.2103L7.25333 2ZM11.2356 9.32316H18.0622L21.3334 15.2103L18.0622 20.9539H11.2356L8.10669 15.2103L11.2356 9.32316Z" fill="currentColor"/>
-                                     <path d="M23.751 30L13.2266 15.2103H21.4755L31.9999 30H23.751Z" fill="#3FF0B9"/>
-                                 </svg>
-                             </div>
-                         </div>
-                         <!--logo End-->         <h4 class="logo-title d-block d-xl-none" data-setting="app_name">Qompac UI</h4>
-                      </a>
-                      <div class="sidebar-toggle" data-toggle="sidebar" data-active="true">
-                         <i class="icon d-flex">
-                            <svg class="icon-20" width="20" viewBox="0 0 24 24">
-                               <path fill="currentColor" d="M4,11V13H16L10.5,18.5L11.92,19.92L19.84,12L11.92,4.08L10.5,5.5L16,11H4Z" />
-                            </svg>
-                         </i>
-                      </div>
+                    <!-- Navbar Toggle Button -->
+                    <button id="navbar-toggle" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
 
-                      <div class="d-flex align-items-center">
-                         <button id="navbar-toggle" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon">
-                            <span class="navbar-toggler-bar bar1 mt-1"></span>
-                            <span class="navbar-toggler-bar bar2"></span>
-                            <span class="navbar-toggler-bar bar3"></span>
+                    @php
+                    $user = Auth::user();
+                @endphp
+
+                <!-- Navbar Items -->
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto align-items-center d-flex flex-column flex-xl-row gap-3">
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">
+                                Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('deposits.index') ? 'active' : '' }}" href="{{ route('deposits.index') }}">
+                                All Deposits
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <span class="nav-link text-success fw-bold">
+                                ${{ number_format($user->balance, 2) }} Balance
                             </span>
-                         </button>
-                      </div>
-                      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                         <ul class="mb-2 navbar-nav ms-auto align-items-center navbar-list mb-lg-0 ">
-                             <li class="nav-item iq-full-screen d-none  d-xl-block border-end" id="fullscreen-item">
-                               <a href="#"  class="nav-link pe-3" id="btnFullscreen" data-bs-toggle="dropdown" >
-                                  <span class="btn-inner">
-                                    <svg class="normal-screen icon-24" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M18.5528 5.99656L13.8595 10.8961" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                        <path d="M14.8016 5.97618L18.5524 5.99629L18.5176 9.96906" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                        <path d="M5.8574 18.896L10.5507 13.9964" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                        <path d="M9.60852 18.9164L5.85775 18.8963L5.89258 14.9235" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                     </svg>
-                                     <svg class="full-normal-screen icon-32 d-none" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M13.7542 10.1932L18.1867 5.79319" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                        <path d="M17.2976 10.212L13.7547 10.1934L13.7871 6.62518" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                        <path d="M10.4224 13.5726L5.82149 18.1398" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                        <path d="M6.74391 13.5535L10.4209 13.5723L10.3867 17.2755" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                     </svg>
-                                  </span>
-                               </a>
-                            </li>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('deposits.create') ? 'active' : '' }}" href="{{ route('deposits.create') }}">
+                                Activate
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('user.ssn.index') ? 'active' : '' }}" href="{{ route('user.ssn.index') }}">
+                                <i class="fas fa-user"></i> SSN Panel
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://t.me/ssnprosale" target="_blank">
+                                <i class="fab fa-telegram"></i> @ssnprosale
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+
+                            <!-- Profile Dropdown -->
                             <li class="nav-item dropdown">
-                               <a class="py-0 nav-link d-flex align-items-center ps-3" href="#" id="profile-setting" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                  <img src="{{ asset('assets/images/avatars/01.png') }}" alt="User-Profile" class="img-fluid avatar avatar-50 avatar-rounded" loading="lazy">
-                                  <div class="caption ms-3 d-none d-md-block ">
-                                     <h6 class="mb-0 caption-title">User</h6>
-                                  </div>
-                               </a>
-                               <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profile-setting">
-                                  <li><a class="dropdown-item" href="{{ route('user.profile') }}">Profile</a></li>
-                                  <li><hr class="dropdown-divider"></li>
-                                  <li><a class="dropdown-item" href="{{ route('signout') }}">Logout</a></li>
-                               </ul>
+                                <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="profile-setting" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <img src="{{ asset('assets/images/avatars/01.png') }}" alt="User-Profile" class="img-fluid avatar avatar-50 avatar-rounded">
+                                </a>
+                                <ul class="dropdown-menu animated fadeIn" aria-labelledby="profile-setting">
+                                    <li><a class="dropdown-item" href="{{ route('user.profile') }}">Profile</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item text-danger" href="{{ route('signout') }}">Logout</a></li>
+                                </ul>
                             </li>
-                         </ul>
-                      </div>
-                   </div>
-                </nav>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
             <!--Nav End-->t
             </div>
             <div class="content-inner container-fluid pb-0" id="page_layout">
@@ -191,12 +194,12 @@
                         <li class="list-inline-item"><a href="javascript:void(0);">Terms of Use</a></li>
                     </ul>
                     <div class="right-panel">
-                        ©<script>2022</script> <span data-setting="app_name">Qompac UI</span>, Made with
+                        ©<script>2024</script> <span data-setting="app_name"></span>, Made with
                         <span class="text-gray">
                             <svg class="icon-16" width="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M15.85 2.50065C16.481 2.50065 17.111 2.58965 17.71 2.79065C21.401 3.99065 22.731 8.04065 21.62 11.5806C20.99 13.3896 19.96 15.0406 18.611 16.3896C16.68 18.2596 14.561 19.9196 12.28 21.3496L12.03 21.5006L11.77 21.3396C9.48102 19.9196 7.35002 18.2596 5.40102 16.3796C4.06102 15.0306 3.03002 13.3896 2.39002 11.5806C1.26002 8.04065 2.59002 3.99065 6.32102 2.76965C6.61102 2.66965 6.91002 2.59965 7.21002 2.56065H7.33002C7.61102 2.51965 7.89002 2.50065 8.17002 2.50065H8.28002C8.91002 2.51965 9.52002 2.62965 10.111 2.83065H10.17C10.21 2.84965 10.24 2.87065 10.26 2.88965C10.481 2.96065 10.69 3.04065 10.89 3.15065L11.27 3.32065C11.3618 3.36962 11.4649 3.44445 11.554 3.50912C11.6104 3.55009 11.6612 3.58699 11.7 3.61065C11.7163 3.62028 11.7329 3.62996 11.7496 3.63972C11.8354 3.68977 11.9247 3.74191 12 3.79965C13.111 2.95065 14.46 2.49065 15.85 2.50065ZM18.51 9.70065C18.92 9.68965 19.27 9.36065 19.3 8.93965V8.82065C19.33 7.41965 18.481 6.15065 17.19 5.66065C16.78 5.51965 16.33 5.74065 16.18 6.16065C16.04 6.58065 16.26 7.04065 16.68 7.18965C17.321 7.42965 17.75 8.06065 17.75 8.75965V8.79065C17.731 9.01965 17.8 9.24065 17.94 9.41065C18.08 9.58065 18.29 9.67965 18.51 9.70065Z" fill="currentColor"></path>
                             </svg>
-                        </span> by <a href="https://iqonic.design/" target="_blank">IQONIC Design</a>.
+                        </span> by <a href="https://iqonic.design/" target="_blank"></a>.
                     </div>
                 </div>
             </footer>

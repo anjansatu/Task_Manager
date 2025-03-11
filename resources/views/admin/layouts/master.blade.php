@@ -54,14 +54,14 @@
         <div id="loading">
         <div class="loader simple-loader">
             <div class="loader-body ">
-                <img src="{{ asset('') }}../assets/images/loader.webp" alt="loader" class="image-loader img-fluid ">
+                <img src="{{ asset('assets/images/loader.webp') }}" alt="loader" class="image-loader img-fluid ">
             </div>
         </div>
         </div>
         <!-- loader END -->
         <aside class="sidebar sidebar-base sidebar-white sidebar-default navs-rounded-all " id="first-tour" data-toggle="main-sidebar" data-sidebar="responsive">
             <div class="sidebar-header d-flex align-items-center justify-content-start">
-                <a href="{{ route('admin.getDashboard') }}" class="navbar-brand">
+                <a href="{{ route('admin.dashboard') }}" class="navbar-brand">
 
                     <!--Logo start-->
                     <div class="logo-main">
@@ -104,7 +104,7 @@
             <!--Nav Start-->
                 <nav class="nav navbar navbar-expand-xl navbar-light iq-navbar">
                    <div class="container-fluid navbar-inner">
-                      <a href="{{ route('admin.getDashboard') }}" class="navbar-brand">
+                      <a href="{{ route('admin.dashboard') }}" class="navbar-brand">
 
                          <!--Logo start-->
                          <div class="logo-main">

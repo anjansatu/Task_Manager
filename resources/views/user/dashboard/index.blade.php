@@ -15,14 +15,14 @@
                                 </div>
                             @endif
                             <div class="container">
-                                <h2 class="mb-4">Your Tasks</h2>
+                                <h2 class="mb-4">Dashboard Overview</h2>
                                 <!-- Cards for total tasks -->
                                 <div class="row mb-3">
                                     <div class="col-md-4">
                                         <div class="card">
-                                            <a href="{{ route('user.tasks.pending') }}" class="text-dark text-decoration-none">
+                                            <a href="" class="text-dark text-decoration-none">
                                                 <div class="card-body">
-                                                    <h5 class="card-title">Pending Tasks</h5>
+                                                    <h5 class="card-title">Last Deposit</h5>
                                                     <p class="card-text">{{ max(auth()->user()->tasks()->pending()->count(), 0) }}</p>
                                                 </div>
                                             </a>
@@ -30,43 +30,36 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="card">
-                                            <a href="{{ route('user.tasks.inProgress') }}" class="text-dark text-decoration-none">
+                                            <a href="" class="text-dark text-decoration-none">
                                                 <div class="card-body">
-                                                    <h5 class="card-title">In Progress Tasks</h5>
+                                                    <h5 class="card-title">Total Purchase SSN</h5>
                                                     <p class="card-text">{{ max(auth()->user()->tasks()->inProgress()->count(), 0) }}</p>
                                                 </div>
                                             </a>
                                         </div>
                                     </div>
+
                                     <div class="col-md-4">
                                         <div class="card">
-                                            <a href="{{ route('user.tasks.completed') }}" class="text-dark text-decoration-none">
+                                            <a href="" class="text-dark text-decoration-none">
                                                 <div class="card-body">
-                                                    <h5 class="card-title">Completed Tasks</h5>
-                                                    <p class="card-text">{{ max(auth()->user()->tasks()->completed()->count(), 0) }}</p>
+                                                    <h5 class="card-title">Status</h5>
+                                                    <button class="btn {{ auth()->user()->status == STATUS_ACTIVE ? 'btn-primary' : 'btn-secondary' }}"
+                                                        {{ auth()->user()->status ==  STATUS_ACTIVE ? '' : 'disabled' }}>
+                                                    {{ auth()->user()->status == STATUS_ACTIVE ? 'Active' : 'Inactive' }}
+                                                </button>
                                                 </div>
                                             </a>
                                         </div>
                                     </div>
                                 </div>
-                                <!-- Filter dropdown or buttons -->
 
-                                <div class="mb-3">
-                                    <label for="statusFilter" class="form-label">All Tasks:</label>
-                                </div>
-                                <ul id="taskList" class="list-group">
-                                    @forelse($tasks as $task)
-                                        <!-- Task list -->
-                                        <ul id="taskList" class="list-group">
-                                            <li class="list-group-item">
-                                                <a href="{{ route('user.tasks.showtask', ['taskId' => $task->id]) }}">{{ $task->title }}</a>
-                                            </li>
-                                        </ul>
-                                    @empty
-                                        <p>No task available</p>
-                                    @endforelse
-
-                                </ul>
+                                <!-- Show this card if user status is inactive -->
+                                @if(auth()->user()->status == STATUS_INACTIVE)
+                                    <div class="alert alert-warning mt-3">
+                                        <strong>Notice:</strong> AFTER ACTIVATE YOUR ACCOUNT BY TOP UP THEN YOU WILL SEE THE PANEL ON YOUR DASHBOARD.
+                                    </div>
+                                @endif
                             </div>
                         @endauth
                     </div>

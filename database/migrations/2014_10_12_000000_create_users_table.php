@@ -20,6 +20,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
             $table->string('phone_number')->nullable();
+            $table->double('balance', 8, 2)->default(0);
             $table->tinyInteger('status')->default(0)->comment('0=inactive;1=active');
             $table->rememberToken();
             $table->timestamps();

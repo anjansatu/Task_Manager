@@ -55,4 +55,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Task::class);
     }
+
+    public function deposit()
+    {
+        return $this->hasMany(Deposit::class);
+    }
+
+    public function order()
+    {
+        return $this->hasMany(Order::class);
+    }
 }

@@ -12,7 +12,7 @@ class UserDashboardController extends Controller
     {
         try {
             $userTasks = auth()->user()->tasks();
-
+            $data['user'] = auth()->user();
             $data['tasks'] = $userTasks->whereIn('status', [TASK_STATUS_TO_DO, TASK_STATUS_IN_PROGRESS, TASK_STATUS_COMPLETE])->get();
 
             return view('user.dashboard.index', $data);

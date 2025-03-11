@@ -1093,3 +1093,56 @@ body.uikit .btn-download {
     background-color: #08004d;
     color: rgb(26, 0, 0);
 }
+
+.navbar {
+    background-color: #ffffff;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.navbar-brand {
+    color: #007bff;
+    font-weight: 700;
+    font-size: 24px;
+}
+
+.navbar-nav .nav-link {
+    color: #555;
+    font-size: 16px;
+    transition: color 0.3s;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #007bff;
+}
+
+.navbar-nav .nav-link.active {
+    color: #007bff;
+    font-weight: bold;
+}
+
+.navbar-toggler-icon {
+    background-color: #007bff;
+}
+
+.dropdown-menu {
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-item {
+    color: #333;
+    font-size: 14px;
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+}
+
+.avatar-rounded {
+    border-radius: 50%;
+}
