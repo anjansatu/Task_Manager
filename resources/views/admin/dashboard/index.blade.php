@@ -61,4 +61,14 @@
     </div>
 </div>
 
+
+   @if(session('success'))
+        <p style="color: green;">{{ session('success') }}</p>
+    @endif
+
+    <form action="{{ route('admin.clear.cash') }}" method="GET">
+        <button type="submit" style="padding: 10px 20px; background-color: red; color: white; border: none; cursor: pointer;">
+            Clear Cache
+        </button>
+    </form>
 @endsection

@@ -1,0 +1,84 @@
+[20-Mar-2025 09:38:07 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/ssnpro/public_html/config/app.php:19
+Stack trace:
+#0 {main}
+  thrown in /home/ssnpro/public_html/config/app.php on line 19
+[22-Mar-2025 00:15:27 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/ssnpro/public_html/config/app.php:19
+Stack trace:
+#0 {main}
+  thrown in /home/ssnpro/public_html/config/app.php on line 19
+[25-Mar-2025 01:49:42 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/ssnpro/public_html/config/app.php:19
+Stack trace:
+#0 {main}
+  thrown in /home/ssnpro/public_html/config/app.php on line 19
+[25-Mar-2025 05:02:30 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/ssnpro/public_html/config/app.php:19
+Stack trace:
+#0 {main}
+  thrown in /home/ssnpro/public_html/config/app.php on line 19
+[25-Mar-2025 12:43:20 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/ssnpro/public_html/config/app.php:19
+Stack trace:
+#0 {main}
+  thrown in /home/ssnpro/public_html/config/app.php on line 19
+[27-Mar-2025 21:29:37 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/ssnpro/public_html/config/app.php:19
+Stack trace:
+#0 {main}
+  thrown in /home/ssnpro/public_html/config/app.php on line 19
+[27-Mar-2025 21:30:13 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/ssnpro/public_html/config/database.php:18
+Stack trace:
+#0 {main}
+  thrown in /home/ssnpro/public_html/config/database.php on line 18
+[27-Mar-2025 21:30:44 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/ssnpro/public_html/config/mail.php:16
+Stack trace:
+#0 {main}
+  thrown in /home/ssnpro/public_html/config/mail.php on line 16
+[27-Mar-2025 21:31:14 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/ssnpro/public_html/config/cache.php:18
+Stack trace:
+#0 {main}
+  thrown in /home/ssnpro/public_html/config/cache.php on line 18
+[27-Mar-2025 21:31:38 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/ssnpro/public_html/config/queue.php:16
+Stack trace:
+#0 {main}
+  thrown in /home/ssnpro/public_html/config/queue.php on line 16
+[27-Mar-2025 21:32:00 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/ssnpro/public_html/config/session.php:21
+Stack trace:
+#0 {main}
+  thrown in /home/ssnpro/public_html/config/session.php on line 21
+[27-Mar-2025 21:32:43 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function resource_path() in /home/ssnpro/public_html/config/view.php:17
+Stack trace:
+#0 {main}
+  thrown in /home/ssnpro/public_html/config/view.php on line 17
+[27-Mar-2025 21:33:43 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/ssnpro/public_html/config/filesystems.php:16
+Stack trace:
+#0 {main}
+  thrown in /home/ssnpro/public_html/config/filesystems.php on line 16
+[27-Mar-2025 21:34:08 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/ssnpro/public_html/config/services.php:18
+Stack trace:
+#0 {main}
+  thrown in /home/ssnpro/public_html/config/services.php on line 18
+[27-Mar-2025 22:59:56 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/ssnpro/public_html/config/app.php:19
+Stack trace:
+#0 {main}
+  thrown in /home/ssnpro/public_html/config/app.php on line 19
+[28-Mar-2025 04:02:11 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/ssnpro/public_html/config/app.php:19
+Stack trace:
+#0 {main}
+  thrown in /home/ssnpro/public_html/config/app.php on line 19
+[28-Mar-2025 04:32:30 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/ssnpro/public_html/config/cache.php:18
+Stack trace:
+#0 {main}
+  thrown in /home/ssnpro/public_html/config/cache.php on line 18
+[31-Mar-2025 06:58:07 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/ssnpro/public_html/config/app.php:19
+Stack trace:
+#0 {main}
+  thrown in /home/ssnpro/public_html/config/app.php on line 19
+[31-Mar-2025 11:48:43 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/ssnpro/public_html/config/app.php:19
+Stack trace:
+#0 {main}
+  thrown in /home/ssnpro/public_html/config/app.php on line 19
+[31-Mar-2025 22:57:59 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/ssnpro/public_html/config/app.php:19
+Stack trace:
+#0 {main}
+  thrown in /home/ssnpro/public_html/config/app.php on line 19
+[01-Apr-2025 18:11:23 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/ssnpro/public_html/config/services.php:18
+Stack trace:
+#0 {main}
+  thrown in /home/ssnpro/public_html/config/services.php on line 18

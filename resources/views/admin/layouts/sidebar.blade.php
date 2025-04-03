@@ -42,7 +42,7 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('admin.deposits.method') }}">
+        <a class="nav-link" href="{{ route('admin.method') }}">
             <i class="icon" data-bs-toggle="tooltip" title="Deposits"></i>
             <span class="item-name">Deposits Methods</span>
         </a>

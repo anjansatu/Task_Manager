@@ -27,4 +27,9 @@ class Deposit extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function depositMethod()
+    {
+        return $this->hasMany(DepositMethod::class, 'id', 'currency_type');
+    }
 }

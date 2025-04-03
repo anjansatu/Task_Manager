@@ -8,11 +8,15 @@ use App\Models\DepositMethod;
 
 class AdminDepositController extends Controller
 {
-    public function index()
-    {
-        $deposits = Deposit::with('user')->orderBy('created_at', 'desc')->get();
-        return view('admin.deposits.index', compact('deposits'));
-    }
+        public function index()
+        {
+            $deposits = Deposit::with('user')
+                ->latest()
+                ->paginate(10);
+        
+            return view('admin.deposits.index', compact('deposits'));
+        }
+
 
     /**
      * Show a specific deposit.

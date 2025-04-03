@@ -4,14 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\Deposit;
 use Illuminate\Http\Request;
+use App\Models\DepositMethod;
 use Illuminate\Support\Facades\Auth;
 
 class UserDepositController extends Controller
 {
     public function index()
     {
-        $data['deposits'] = Deposit::where('user_id', Auth::id())->orderBy('created_at', 'desc')->get();
+        $data['deposits'] = Deposit::with('depositMethod')->where('user_id', Auth::id())->orderBy('created_at', 'desc')->get();
 
+        // dd($data['deposits']);
         return view('user.deposits.index',$data);
     }
 
@@ -20,7 +22,8 @@ class UserDepositController extends Controller
      */
     public function create()
     {
-        return view('user.deposits.create');
+        $data['methods'] = DepositMethod::all();
+        return view('user.deposits.create',$data);
     }
 
     /**

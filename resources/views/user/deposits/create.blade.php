@@ -20,13 +20,11 @@
                 @csrf
                 <div class="mb-3">
                     <label class="form-label">Currency Type</label>
-                    <select name="currency_type" class="form-control" required>
-                        <option value="" disabled selected>Select Currency</option>
-                        <option value="USD">USD - US Dollar</option>
-                        <option value="EUR">EUR - Euro</option>
-                        <option value="BDT">BDT - Bangladeshi Taka</option>
-                        <option value="GBP">GBP - British Pound</option>
-                        <option value="INR">INR - Indian Rupee</option>
+                    <select name="currency_type" class="form-control" required id="currency_type">
+                        <option value="">Select a currency</option>
+                        @foreach($methods as $method)
+                            <option value="{{ $method->id }}" data-address="{{ $method->address }}">{{ $method->name }}</option>
+                        @endforeach
                     </select>
                 </div>
                 <div class="mb-3">
@@ -35,17 +33,22 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label">To address</label>
-                    <select name="to" class="form-control" required>
-                        <option value="">Select an address</option>
-                        <option value="bc1q9p4wmfuksjp5fwpquclaxkvad5d7uvrqqyjlvv">bc1q9p4wmfuksjp5fwpquclaxkvad5d7uvrqqyjlvv</option>
-                        <option value="bc1q9p4wmfuksjp5fwpquclaxkvad5d7uvrqqyjlvv">bc1q9p4wmfuksjp5fwpquclaxkvad5d7uvrqqyjlvv</option>
-                        <option value="bc1q9p4wmfuksjp5fwpquclaxkvad5d7uvrqqyjlvv">bc1q9p4wmfuksjp5fwpquclaxkvad5d7uvrqqyjlvv</option>
-                    </select>
+                    <div class="input-group">
+                        <select name="to" class="form-control" required id="to">
+                            <option value="">Select a currency</option>
+                            @foreach($methods as $address)
+                                <option value="{{ $address->address }}">
+                                    {{ $address->name }} - {{ $address->address }}
+                                </option>
+                            @endforeach
+                        </select>
+                        <button type="button" class="btn btn-outline-secondary" id="copyBtn">Copy</button>
+                    </div>
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label">Amount</label>
-                    <input type="number" name="amount" class="form-control" step="0.01" required>
+                    <input type="number" name="amount" class="form-control" step="0.01" placeholder="min deposit $30 " required>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Transaction ID</label>
@@ -55,6 +58,23 @@
             </form>
         </div>
     </div>
-
 </div>
+
+<script>
+    document.getElementById('copyBtn').addEventListener('click', function() {
+        var select = document.getElementById('to');
+        var selectedText = select.options[select.selectedIndex].value;
+
+        if (selectedText) {
+            navigator.clipboard.writeText(selectedText).then(function() {
+                alert('Address copied: ' + selectedText);
+            }).catch(function(err) {
+                alert('Failed to copy address');
+            });
+        } else {
+            alert('Please select an address first');
+        }
+    });
+</script>
+
 @endsection

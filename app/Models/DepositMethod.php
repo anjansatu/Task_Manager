@@ -10,4 +10,10 @@ class DepositMethod extends Model
     use HasFactory;
 
     protected $fillable = ['name', 'address'];
+
+
+    public function deposits()
+    {
+        return $this->hasMany(Deposit::class);
+    }
 }

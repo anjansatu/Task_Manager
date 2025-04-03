@@ -3,7 +3,7 @@
 @section('admin-content')
     <div class="container">
         <h2>Add SSN</h2>
-        <form action="{{ route('admin.ssns.store') }}" method="POST">
+        {{-- <form action="{{ route('admin.ssns.store') }}" method="POST">
             @csrf
             <div class="form-group">
                 <label>First Name</label>
@@ -46,6 +46,6 @@
                 <input type="text" name="country" class="form-control" required>
             </div>
             <button type="submit" class="btn btn-primary">Save</button>
-        </form>
+        </form> --}}
     </div>
 @endsection

@@ -2,13 +2,15 @@
 <!doctype html>
 <html lang="en" dir="ltr">
     <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title data-setting="app_name" data-rightJoin=" Responsive Bootstrap 5 Admin Dashboard Template">SSN pro</title>
-        <meta name="description" content="Qompac UI is a revolutionary Bootstrap Admin Dashboard Template and UI Components Library. The Admin Dashboard Template and UI Component features 8 modules.">
-        <meta name="keywords" content="premium, admin, dashboard, template, bootstrap 5, clean ui, qompac-ui, admin dashboard,responsive dashboard, optimized dashboard,">
-        <meta name="author" content="Iqonic Design">
-        <meta name="DC.title" content="SSN pro">
+       
+       
+       <meta charset="utf-8" />
+        <title>SSN PRO</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+        <meta content="https://ssnpro.sale" name="description" />
+        <meta content="Coderthemes" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
         <!-- Favicon -->
         <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}">
@@ -121,7 +123,7 @@
 
                     <!-- Navbar Toggle Button -->
                     <button id="navbar-toggle" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
+                        Manu
                     </button>
 
                     @php
@@ -142,15 +144,21 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('user.ssn.purchase') ? 'active' : '' }}" href="{{ route('user.ssn.purchase') }}">
+                                Purchased SSNs
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <span class="nav-link text-success fw-bold">
                                 ${{ number_format($user->balance, 2) }} Balance
                             </span>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('deposits.create') ? 'active' : '' }}" href="{{ route('deposits.create') }}">
-                                Activate
+                                {{ Auth::user()->status === STATUS_INACTIVE ? 'Activate' : 'Deposit' }}
                             </a>
                         </li>
+
                         <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('user.ssn.index') ? 'active' : '' }}" href="{{ route('user.ssn.index') }}">
                                 <i class="fas fa-user"></i> SSN Panel
@@ -240,7 +248,6 @@
         <!-- Slider-tab Script -->
         <script src="{{ asset('assets/js/plugins/slider-tabs.js') }}"></script>
 
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 

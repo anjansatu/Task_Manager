@@ -8,16 +8,15 @@ use App\Http\Controllers\BaseController as Controller;
 
 class UserController extends Controller
 {
-    public function index()
-    {
-        try {
-            $data['users'] = User::all();
-            return view('admin.user.index', $data);
-        } catch (\Exception $e) {
-            return $this->sessionError("Oops! An error occurred .","admin.user.index");
-
-        }
+   public function index()
+{
+    try {
+        $users = User::paginate(10); // Ensure pagination is applied
+        return view('admin.user.index', compact('users'));
+    } catch (\Exception $e) {
+        return $this->sessionError("Oops! An error occurred.", "admin.user.index");
     }
+}
 
     public function destroy($id)
     {

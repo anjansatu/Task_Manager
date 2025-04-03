@@ -12,7 +12,7 @@
         @endif
 
         <!-- Add Deposit Method Form -->
-        <form action="{{ route('admin.deposits.storeDepositMethods') }}" method="POST">
+        <form action="{{ route('admin.storeDepositMethods') }}" method="POST">
             @csrf
             <div class="form-group">
                 <label for="name">Method Name</label>
@@ -47,7 +47,7 @@
                         <td>{{ $method->address }}</td>
                         <td>
                             <!-- Delete Button -->
-                            <form action="{{ route('admin.deposits.destroyDepositMethods', $method->id) }}" method="POST" style="display:inline-block;">
+                            <form action="{{ route('admin.destroyDepositMethods', $method->id) }}" method="POST" style="display:inline-block;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger">Delete</button>

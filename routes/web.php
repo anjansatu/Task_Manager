@@ -8,6 +8,7 @@ use App\Http\Controllers\user\ProfileController;
 use App\Http\Controllers\UserDashboardController;
 use App\Http\Controllers\user\auth\AuthController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,14 +20,14 @@ use App\Http\Controllers\user\auth\AuthController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('landing');
+});
 
 Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);
 
 
-Route::get('/', [AuthController::class, 'index'])->name('login');
+Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::post('/signin', [AuthController::class, 'postLogin'])->name('post.login');
 Route::get('/signup', [AuthController::class, 'signup'])->name('signUp');
 Route::post('/signup', [AuthController::class, 'postSignUp'])->name('post.signUp');
@@ -45,12 +46,17 @@ Route::group(['prefix' => 'user', 'middleware' => [ 'auth']], function () {
     Route::post('/change-password', [ProfileController::class, 'changePassword'])->name('user.changePassword');
 
     Route::get('ssn-index', [SsnController::class, 'index'])->name('user.ssn.index');
-    
+    Route::post('/ssn/store-order', [SsnController::class, 'storeOrder'])->name('ssn.storeOrder');
+
+    Route::get('purchase-ssn', [SsnController::class, 'history'])->name('user.ssn.purchase');
+
 
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
     Route::get('/orders/create', [OrderController::class, 'create'])->name('orders.create');
     Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
     Route::get('/orders/{order}', [OrderController::class, 'show'])->name('orders.show');
+    
+    
 
 
 });

@@ -3,9 +3,9 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Login | Qompac UI</title>
-    <meta name="description" content="Qompac UI - Responsive Bootstrap 5 Admin Dashboard Template">
-    <meta name="keywords" content="admin, dashboard, template, bootstrap 5, qompac-ui">
+    <title>Login | SSN PRO</title>
+    <meta name="description" content="SSN PRO - Responsive Bootstrap 5 Admin Dashboard Template">
+    <meta name="keywords" content="admin, dashboard, template, bootstrap 5, SSN PRO">
     <meta name="author" content="Iqonic Design">
 
     <!-- Favicon -->

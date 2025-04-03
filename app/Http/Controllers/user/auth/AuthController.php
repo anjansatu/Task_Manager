@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Password;
 use App\Http\Requests\UserRegistrationRequest;
 use App\Http\Requests\Web\ForgetPasswordRequest;
+use Illuminate\Support\Facades\RateLimiter;
 use App\Http\Controllers\BaseController as Controller;
 
 class AuthController extends Controller
@@ -22,43 +23,61 @@ class AuthController extends Controller
         $this->authService = $service;
     }
 
-    public function index(){
+    public function index()
+    {
         return view('user.auth.login');
     }
 
-    public function postLogin(Request $request)
-{
-    if (allsetting('access_login') != 1) {
-        return $this->sessionError('Login access is currently disabled.', null);
+   public function postLogin(Request $request)
+    {
+        if (allsetting('access_login') != 1) {
+            return back()->withErrors(['error' => 'Login access is currently disabled.']);
+        }
+    
+        // Unique Key for Rate Limiting (IP Based)
+        $key = 'login_attempts_' . $request->ip();
+    
+        // Check if Too Many Login Attempts
+        if (RateLimiter::tooManyAttempts($key, 5)) {
+            return back()->withErrors(['error' => 'Too many login attempts. Please try again in 1 minute.'])->withInput();
+        }
+    
+        // Validate Input
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email',
+            'password' => 'required',
+            // 'g-recaptcha-response' => 'required'
+        ]);
+    
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
+    
+        // Verify Google reCAPTCHA (Optional)
+        /*
+        $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
+            'secret' => env('RECAPTCHA_SECRET'),
+            'response' => $request->input('g-recaptcha-response')
+        ]);
+    
+        $result = $response->json();
+    
+        if (!$result['success']) {
+            return back()->withErrors(['captcha' => 'reCAPTCHA verification failed!'])->withInput();
+        }
+        */
+    
+        // Authenticate User
+        if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')])) {
+            RateLimiter::clear($key); // Reset Rate Limiter on Successful Login
+            return redirect()->route('dashboard')->with('success', "You have successfully logged in.");
+        }
+    
+        // Increase Login Attempt Count
+        RateLimiter::hit($key, 60); // 60 seconds (1 min) cooldown
+    
+        return back()->withErrors(['error' => "Oops! Incorrect email or password. Please try again."]);
     }
-
-    $validator = Validator::make($request->all(), [
-        'email' => 'required|email', // Email field validation যোগ করা হলো
-        'password' => 'required',
-    ]);
-
-    if ($validator->fails()) {
-        return $this->sessionError($validator->errors()->first());
-    }
-
-    // $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
-    //     'secret' => env('RECAPTCHA_SECRET'),
-    //     'response' => $request->input('g-recaptcha-response')
-    // ]);
-
-    // $result = $response->json();
-
-    // if (!$result['success']) {
-    //     return back()->withErrors(['captcha' => 'reCAPTCHA verification failed!']);
-    // }
-
-
-    if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')])) {
-        return $this->sessionSuccess("You have successfully logged in to ", 'dashboard');
-    }
-
-    return $this->sessionError("Oops! It seems there might be an error with the email or password you've entered. Please double-check your details and try again.");
-}
 
 
     public function signup(){

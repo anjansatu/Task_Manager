@@ -20,11 +20,12 @@ return new class extends Migration
             $table->string('state')->nullable();
             $table->string('zip')->nullable();
             $table->string('ssn')->nullable();
-            $table->string('dob')->nullable();
+            $table->date('dob')->nullable();  // Change from 'double' to 'date'
             $table->string('year')->nullable();
             $table->string('country')->nullable();
             $table->timestamps();
         });
+
     }
 
     /**

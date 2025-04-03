@@ -12,18 +12,16 @@
         <table class="table table-hover table-bordered align-middle text-center">
             <thead class="table-dark">
                 <tr>
-                    {{-- <th>ID</th> --}}
                     <th>User</th>
                     <th>Amount</th>
                     <th>Status</th>
-                    <th>Deposit date</th>
+                    <th>Deposit Date</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($deposits as $deposit)
                     <tr>
-                        {{-- <td>{{ $deposit->id }}</td> --}}
                         <td>{{ $deposit->user->name ?? 'N/A' }}</td>
                         <td><strong>${{ number_format($deposit->amount, 2) }}</strong></td>
                         <td>
@@ -32,8 +30,8 @@
                             </span>
                         </td>
                         <td style="color: rgb(16, 26, 75);">
-                            {{ $deposit->created_at->format('F d, Y  (h:i A)') }}
-                          </td>
+                            {{ $deposit->created_at->format('F d, Y (h:i A)') }}
+                        </td>
                         <td>
                             <a href="{{ route('admin.deposits.show', $deposit->id) }}" class="btn btn-sm btn-primary">
                                 <i class="fas fa-eye"></i> View
@@ -43,6 +41,11 @@
                 @endforeach
             </tbody>
         </table>
+    </div>
+
+    <!-- Pagination -->
+    <div class="d-flex justify-content-center mt-3">
+        {{ $deposits->links() }}
     </div>
 </div>
 @endsection

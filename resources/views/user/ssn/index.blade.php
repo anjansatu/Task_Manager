@@ -4,7 +4,7 @@
 <div class="container mt-5">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2 class="fw-bold text-primary">SSN List</h2>
-        <form method="GET" action="{{ route(name: 'user.ssn.index') }}" class="d-flex">
+        <form method="GET" action="{{ route('user.ssn.index') }}" class="d-flex">
             <input type="text" name="search" class="form-control me-2" placeholder="Search..." value="{{ request('search') }}">
             <button type="submit" class="btn btn-outline-primary">Search</button>
         </form>
@@ -25,10 +25,9 @@
                         <th>#</th>
                         <th>First Name</th>
                         <th>Last Name</th>
-                        <th>City</th>
                         <th>State</th>
-                        <th>ZIP</th>
                         <th>Country</th>
+                        <th>Year</th>
                         <th>Price</th>
                         <th>Purchase</th>
                     </tr>
@@ -39,10 +38,9 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $ssn->first_name }}</td>
                             <td>{{ $ssn->last_name }}</td>
-                            <td>{{ $ssn->city }}</td>
                             <td>{{ $ssn->state }}</td>
-                            <td>{{ $ssn->zip }}</td>
                             <td>{{ $ssn->country }}</td>
+                            <td>{{ $ssn->year }}</td>
                             <td>
                                 @if($ssn->price)
                                     <span class="fw-bold text-success">${{ number_format($ssn->price->amount, 2) }}</span>
@@ -71,8 +69,9 @@
     @endif
 </div>
 
-{{-- JavaScript --}}
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
 <script>
     $(document).ready(function() {
         $('.buy-btn').click(function(e) {
@@ -82,7 +81,7 @@
             let ssnId = button.data('id');
 
             $.ajax({
-                url: "{{ route('orders.store') }}",
+                url: "{{ route('ssn.storeOrder') }}",
                 method: "POST",
                 data: {
                     _token: "{{ csrf_token() }}",
@@ -92,14 +91,21 @@
                     if (response.success) {
                         button.prop('disabled', true);
                         button.removeClass('btn-primary').addClass('btn-success');
-                        button.html('<i class="fas fa-check"></i> Bought');
+                        button.html('<i class="fas fa-check"></i>'); // Checkmark icon instead of text
+
+                        // Reload the page after success
+                        location.reload();
+                    } else {
+                        alert("Failed to process the order.");
                     }
                 },
-                error: function() {
-                    alert("Something went wrong! Please try again.");
+                error: function(xhr) {
+                    alert("Error: " + xhr.responseJSON.message);
                 }
             });
         });
     });
 </script>
+
+
 @endsection

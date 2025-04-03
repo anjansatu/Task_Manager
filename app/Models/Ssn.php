@@ -12,12 +12,12 @@ class Ssn extends Model
     protected $fillable = [
         'first_name',
         'last_name',
-        'dob',
         'address',
         'city',
         'state',
         'zip',
         'ssn',
+        'dob',
         'year',
         'country',
     ];

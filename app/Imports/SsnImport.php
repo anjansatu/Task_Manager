@@ -17,12 +17,12 @@ class SsnImport implements ToModel, WithHeadingRow
         return new Ssn([
             'first_name' => $row['first_name'] ?? '',
             'last_name'  => $row['last_name'] ?? '',
-            'dob'        => $row['dob'] ?? null,
             'address'    => $row['address'] ?? '',
             'city'       => $row['city'] ?? '',
             'state'      => $row['state'] ?? '',
             'zip'        => $row['zip'] ?? '',
             'ssn'        => $row['ssn'] ?? '',
+            'dob'        => $row['dob'] ?? null,
             'year'       => $row['year'] ?? '',
             'country'    => $row['country'] ?? '',
         ]);

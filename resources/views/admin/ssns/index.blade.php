@@ -47,10 +47,10 @@
         <thead>
             <tr>
                 <th>Full Name</th>
-                <th>DOB</th>
                 <th>Address</th>
                 <th>City</th>
                 <th>State</th>
+                <th>Zip</th>
                 <th>SSN</th>
                 <th>Actions</th>
             </tr>
@@ -59,10 +59,10 @@
             @foreach ($ssns as $ssn)
                 <tr>
                     <td>{{ $ssn->full_name }}</td>
-                    <td>{{ $ssn->dob }}</td>
                     <td>{{ $ssn->address }}</td>
                     <td>{{ $ssn->city }}</td>
                     <td>{{ $ssn->state }}</td>
+                    <td>{{ $ssn->zip }}</td>
                     <td>{{ $ssn->ssn }}</td>
                     <td>
                         <a href="{{ route('admin.ssns.show', $ssn->id) }}" class="btn btn-info btn-sm">View</a>

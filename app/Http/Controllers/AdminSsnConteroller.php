@@ -9,22 +9,22 @@ class AdminSsnConteroller extends Controller
 {
     public function index(Request $request)
     {
-        $query = Ssn::query(); 
+        $query = Ssn::query();
 
         if ($request->has('search')) {
             $search = $request->search;
 
             $query->where(function ($q) use ($search) {
-                $q->where('first_name', 'like', "%$search%")
-                  ->orWhere('last_name', 'like', "%$search%")
-                  ->orWhere('dob', 'like', "%$search%")
-                  ->orWhere('address', 'like', "%$search%")
-                  ->orWhere('city', 'like', "%$search%")
-                  ->orWhere('state', 'like', "%$search%")
-                  ->orWhere('zip', 'like', "%$search%")
-                  ->orWhere('ssn', 'like', "%$search%")
-                  ->orWhere('year', 'like', "%$search%")
-                  ->orWhere('country', 'like', "%$search%");
+                $q->where('first_name', 'like', "%{$search}%")
+                    ->orWhere('last_name', 'like', "%{$search}%")
+                    ->orWhere('address', 'like', "%{$search}%")
+                    ->orWhere('city', 'like', "%{$search}%")
+                    ->orWhere('state', 'like', "%{$search}%")
+                    ->orWhere('zip', 'like', "%{$search}%")
+                    ->orWhere('ssn', 'like', "%{$search}%")
+                    ->orWhere('dob', 'like', "%{$search}%")
+                    ->orWhere('year', 'like', "%{$search}%")
+                    ->orWhere('country', 'like', "%{$search}%");
             });
         }
 
@@ -45,13 +45,12 @@ class AdminSsnConteroller extends Controller
         $request->validate([
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
-            'dob' => 'required|date',
             'address' => 'required|string',
             'city' => 'required|string',
             'state' => 'required|string',
             'zip' => 'required|string',
             'ssn' => 'required|string|unique:ssns,ssn',
-            'year' => 'required|integer',
+            'dob' => 'required|string',
             'country' => 'required|string',
         ]);
 
@@ -75,13 +74,12 @@ class AdminSsnConteroller extends Controller
         $request->validate([
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
-            'dob' => 'required|date',
             'address' => 'required|string',
             'city' => 'required|string',
             'state' => 'required|string',
             'zip' => 'required|string',
             'ssn' => 'required|string|unique:ssns,ssn,' . $ssn->id,
-            'year' => 'required|integer',
+            'dob' => 'required|string',
             'country' => 'required|string',
         ]);
 

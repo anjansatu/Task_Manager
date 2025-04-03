@@ -23,6 +23,8 @@ Route::group(['middleware' => ['auth:admin']], function () {
     Route::prefix('admin')->name('admin.')->group(function () {
 
         Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+        Route::get('/clear-cash', [DashboardController::class, 'clearCash'])->name('clear.cash');
+
 
 
         // Profile
@@ -42,11 +44,12 @@ Route::group(['middleware' => ['auth:admin']], function () {
             Route::get('{id}', [AdminDepositController::class, 'show'])->name('show');
             Route::put('{id}/status', [AdminDepositController::class, 'updateStatus'])->name('updateStatus');
 
-            Route::get('deposit-method', [AdminDepositController::class, 'depositMethods'])->name('method');
-            Route::post('deposit-methods', [AdminDepositController::class, 'storeDepositMethods'])->name('storeDepositMethods');
-            Route::delete('deposit-methods/{id}', [AdminDepositController::class, 'destroyDepositMethods'])->name('destroyDepositMethods');
+
         });
 
+        Route::get('/deposit-method', [AdminDepositController::class, 'depositMethods'])->name('method');
+        Route::post('/deposit-methods', [AdminDepositController::class, 'storeDepositMethods'])->name('storeDepositMethods');
+        Route::delete('/deposit-methods/{id}', [AdminDepositController::class, 'destroyDepositMethods'])->name('destroyDepositMethods');
         // Notifications
         Route::get('/notify-user/{taskId}', [NotificationController::class, 'notifyUser'])->name('notify.user');
 

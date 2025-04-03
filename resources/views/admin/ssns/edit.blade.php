@@ -9,7 +9,7 @@
             @csrf
             @method('PUT')
 
-            <div class="form-group">
+            {{-- <div class="form-group">
                 <label>First Name</label>
                 <input type="text" name="first_name" class="form-control" value="{{ $ssn->first_name }}" required>
             </div>
@@ -57,7 +57,7 @@
             <div class="form-group">
                 <label>Country</label>
                 <input type="text" name="country" class="form-control" value="{{ $ssn->country }}" required>
-            </div>
+            </div> --}}
 
             <button type="submit" class="btn btn-primary">Update</button>
         </form>
